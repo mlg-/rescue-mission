@@ -44,4 +44,5 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'make_it_so'
+  gem 'pry'
 end

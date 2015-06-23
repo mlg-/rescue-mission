@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RescueMission</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" />
+  <script src="/assets/application.js"></script>
+  
+</head>
+<body>
+
+  <div class="row">
+  </div>
+
+<h1>Submit a New Question</h1>
+
+<form class="new-question-form" id="new_question" action="/questions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="question_title">Your question</label>
+  <input type="text" name="question[title]" id="question_title" />
+  <label for="question_body">More details</label>
+  <textarea name="question[body]" id="question_body">
+</textarea>
+  <input type="submit" name="commit" value="Ask Your Question!" />
+</form>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
 class Question < ActiveRecord:: Base
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :title, presence: true, length: { minimum: 40 }
+  validates :body, presence: true, length: { minimum: 150 }
 end

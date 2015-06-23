@@ -1,0 +1,9 @@
+<h1>Submit a New Question</h1>
+
+<%= form_for @question, url: {action: "create"}, html: {class: "new-question-form"} do |f| %>
+  <%= f.label :title, 'Your question' %>
+  <%= f.text_field :title %>
+  <%= f.label :body, 'More details' %>
+  <%= f.text_area :body %>
+  <%= f.submit 'Ask Your Question!' %>
+<% end %>

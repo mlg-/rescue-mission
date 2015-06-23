@@ -11,10 +11,14 @@ So that I can help others
     # - I must see questions listed in order, most recently posted first
 
     scenario 'visit the index page' do
-        question = Question.create!(title: "How does Rails even?",
-                   body: "Wut.")
-        question2 = Question.create!(title: "How do I become great?",
-                    body: "Ask Vikram.")
+        question = Question.create!(title: "How does Rails even? aka Magic Deciphering",
+                   body: "Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut
+                   Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.
+                   Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.")
+        question2 = Question.create!(title: "How do I become great? aka literal steps pls",
+                    body: "Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram.
+                    Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram.
+                    Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram. Ask Vikram.")
 
         visit '/questions'
         expect(page).to have_content("All Questions")
@@ -36,8 +40,10 @@ So that I can effectively understand the question
   # - I must see the question's description
 
     scenario 'click on a question' do
-      question = Question.create!(title: "How does Rails even?",
-                 body: "Wut.")
+      question = Question.create!(title: "How does Rails even? aka Magic Deciphering",
+                 body: "Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut
+                 Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.
+                 Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.Wut.")
       visit '/questions'
 
       click_link(question.title)
