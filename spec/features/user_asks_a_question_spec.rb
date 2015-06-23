@@ -7,6 +7,15 @@ So that I can receive help from others
 } do
 
   scenario 'visitor tries to submit a question' do
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit '/questions/new'
 
     expect(page).to have_content('Submit a New Question')
@@ -17,7 +26,16 @@ So that I can receive help from others
     expect(page).to have_content("Your question has been added.")
   end
 
-  scenario 'visit tries to submit a question with no description' do
+  scenario 'visitor tries to submit a question with no description' do
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit '/questions/new'
     expect(page).to have_content('Submit a New Question')
     fill_in('Your question', with: "How does Rails even? aka Magic Deciphering")
