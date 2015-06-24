@@ -15,7 +15,6 @@ class QuestionsController < ApplicationController
     else
       flash[:notice] = "You need to be signed in to ask a question."
       redirect_to new_user_session_path
-
     end
   end
 
@@ -30,6 +29,33 @@ class QuestionsController < ApplicationController
     if @question.save
        flash[:notice] = "Your question has been added."
        redirect_to questions_path
+    else
+      flash[:error] = @question.errors.full_messages.join(". ")
+      render :new
+    end
+
+  end
+
+  def edit
+    if user_signed_in?
+      @question = Question.find(params[:id])
+    else
+      flash[:notice] = "You need to be signed in to edit a question."
+      redirect_to new_user_session_path
+    end
+  end
+
+  def update
+    unless user_signed_in?
+      flash[:notice] = "You need to be signed in to ask a question."
+      redirect_to new_user_session_path
+    end
+
+    @question = Question.find(params[:id])
+
+    if @question.update(question_params)
+       flash[:notice] = "The question has been edited."
+       redirect_to question_path(id: @question.id)
     else
       flash[:error] = @question.errors.full_messages.join(". ")
       render :new

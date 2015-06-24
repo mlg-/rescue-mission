@@ -1,0 +1,8 @@
+<h1>Edit Your Question</h1>
+<%= form_for @question, url: {action: "update"}, html: {class: "edit-question-form"} do |f| %>
+  <%= f.label :title, 'Your question' %>
+  <%= f.text_field :title %>
+  <%= f.label :body, 'More details' %>
+  <%= f.text_area :body %>
+  <%= f.submit 'Save Changes' %>
+<% end %>
