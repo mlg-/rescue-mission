@@ -9,6 +9,7 @@ class AnswersController < ApplicationController
       redirect_to question_path(params[:question_id])
     else
       @question = Question.find(params[:question_id])
+      @body = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@question.body)
       flash[:notice] = @answer.errors.full_messages
       render 'questions/show'
     end

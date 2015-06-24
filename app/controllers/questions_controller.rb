@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @body = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@question.body)
     @answer = Answer.new
     @answers = Answer.where(question_id: params[:id]).order(created_at: :asc)
   end
