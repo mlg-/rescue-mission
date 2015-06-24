@@ -2,6 +2,7 @@
 
 <p><%= @question.body %></p>
 <%= link_to 'Edit this question', edit_question_path(id: @question.id) %>
+<%= link_to "Delete this question", question_path(@question), method: :delete %>
 
 <h2>Answer this Question</h2>
 
