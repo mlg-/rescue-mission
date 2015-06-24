@@ -1,3 +1,16 @@
 <h1><%= @question.title %></h1>
 
 <p><%= @question.body %></p>
+
+<h2>Answer this Question</h2>
+
+<%= render "answers/new" %>
+
+<h2>Other Answers</h2>
+<ul>
+  <% unless @answers.nil? %>
+    <% @answers.each do |answer| %>
+      <li><%= answer.description %></li>
+    <% end %>
+  <% end %>
+</ul>
