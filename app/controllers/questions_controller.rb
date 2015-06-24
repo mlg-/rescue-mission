@@ -60,7 +60,12 @@ class QuestionsController < ApplicationController
       flash[:error] = @question.errors.full_messages.join(". ")
       render :new
     end
+  end
 
+  def destroy
+    @question = Question.find(params[:id]).delete
+    flash[:notice] = "The question has been deleted."
+    redirect_to questions_path
   end
 
   protected
