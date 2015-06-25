@@ -26,6 +26,8 @@
     </section>
   </nav>
 
+  <div class="wrapper">
+
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %> alert-box">
       <%= value %>
@@ -33,7 +35,9 @@
   <%- end -%>
 
   <%= yield %>
-
+  
+  </div><!--close wrapper-->
+  
   <%= javascript_include_tag 'application' %>
   <%= yield :extra_footer %>
 </body>

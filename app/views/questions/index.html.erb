@@ -5,3 +5,5 @@
     <li><%= link_to "#{question.title}", question_path(id: question.id)%></li>
   <% end %>
 </ul>
+
+<%= link_to "Ask a New Question", new_question_path %>

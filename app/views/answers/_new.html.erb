@@ -1,6 +1,6 @@
 <%= form_for @answer do |f| %>
   <%= f.label :description, 'Your Answer' %>
-  <%= f.text_field :description %>
+  <%= f.text_area :description %>
   <%= hidden_field_tag(:question_id, "#{@question.id}") %>
-  <%= f.submit 'Save the day!' %>
+  <%= f.submit 'Save the day!', class: "button" %>
 <% end %>

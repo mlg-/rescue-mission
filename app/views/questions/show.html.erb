@@ -1,18 +1,24 @@
 <h1><%= @question.title %></h1>
 
 <p><%= @body.html_safe %></p>
-<%= link_to 'Edit this question', edit_question_path(id: @question.id) %>
+<%= link_to 'Edit this question', edit_question_path(id: @question.id) %> ||
 <%= link_to "Delete this question", question_path(@question), method: :delete %>
 
 <h2>Answer this Question</h2>
 
-<%= render "answers/new" %>
+<%= render "answers/new" %><br/>
 
-<h2>Other Answers</h2>
-<ul>
+<h2>Answers</h2>
+<ul class="answers">
   <% unless @answers.nil? %>
-    <% @answers.each do |answer| %>
-      <li><%= answer.description %></li>
+    <% @answers.each do |answer| %> 
+    		<% if answer.best_answer %>
+    		<h3 class="best">Best Answer</h3>
+      	<li class="best-answer" id="<%= answer.id %>"><%= answer.description %></li>
+      	<% else %>
+      	<li id="<%= answer.id %>"><%= answer.description %></li>
+      	<%= button_to 'Choose As Best Answer', answer_path(answer.id), method: :patch, class: "button small", id: "button-#{answer.id}" %> <br/>
+      	<% end %>
     <% end %>
   <% end %>
 </ul>

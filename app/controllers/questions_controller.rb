@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @body = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@question.body)
     @answer = Answer.new
-    @answers = Answer.where(question_id: params[:id]).order(created_at: :asc)
+    @answers = Answer.where(question_id: params[:id]).order(best_answer: :desc, created_at: :asc)
   end
 
   def new

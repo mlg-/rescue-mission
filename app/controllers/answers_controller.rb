@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
+    
     if @answer.save
       redirect_to question_path(params[:question_id])
     else
@@ -16,11 +17,30 @@ class AnswersController < ApplicationController
   end
 
   def show
-    @answer = Answer(params[:id])
+    @answer = Answer.find(params[:id])
+  end
+
+  def update
+    @answer = Answer.find(params[:id])
+    @question = @answer.question_id
+
+    Question.find(@question).answers.each do |answer|
+      if answer.best_answer == true
+        answer.update(best_answer: false)
+      end
+    end
+
+    if @answer.update(best_answer: true)
+      flash[:notice] = "You have marked a best answer"
+      redirect_to question_path(@answer.question_id)
+    else
+      flash[:notice] = @answer.errors.full_messages
+      render 'questions/show'
+    end
   end
 
   protected
   def answer_params
-    params.require(:answer).permit(:description, :user, :question).merge(user_id: current_user.id, question_id: params[:question_id])
+    params.require(:answer).permit(:description, :user, :question, :best_answer).merge(user_id: current_user.id, question_id: params[:question_id])
   end
 end

@@ -1,10 +1,10 @@
 <h1>Submit a New Question</h1>
-<p>(<%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/" %> is supported)</p>
 
 <%= form_for @question, url: {action: "create"}, html: {class: "new-question-form"} do |f| %>
   <%= f.label :title, 'Your question' %>
   <%= f.text_field :title %>
   <%= f.label :body, 'More details' %>
   <%= f.text_area :body %>
+  <p>(<%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/" %> is supported)</p>
   <%= f.submit 'Ask Your Question!' %>
 <% end %>
