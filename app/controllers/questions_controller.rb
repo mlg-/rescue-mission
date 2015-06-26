@@ -44,6 +44,13 @@ class QuestionsController < ApplicationController
       flash[:notice] = "You need to be signed in to edit a question."
       redirect_to new_user_session_path
     end
+    
+    if @question.belongs_to_user?(@user)
+      render 'edit'
+    else
+      flash[:notice] = "You don't have permission to edit this question."
+      redirect_to question_path(@question.id)
+    end
   end
 
   def update
@@ -54,7 +61,7 @@ class QuestionsController < ApplicationController
 
     @question = Question.find(params[:id])
 
-    if @question.update(question_params)
+    if @question.update(question_params) && @question.belongs_to_user?(@user)
        flash[:notice] = "The question has been edited."
        redirect_to question_path(id: @question.id)
     else
@@ -64,10 +71,19 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id]).delete
-    @answers = @question.answers.delete
-    flash[:notice] = "The question has been deleted."
-    redirect_to questions_path
+
+    @question = Question.find(params[:id])
+    @user = current_user.id
+
+    if @question.belongs_to_user?(@user)
+      @question.delete
+      @question.answers.delete
+      flash[:notice] = "The question has been deleted."
+      redirect_to questions_path
+    else
+      flash[:error] = "You don't have permission to delete this question."
+      redirect_to question_path(@question.id)
+    end
   end
 
   protected

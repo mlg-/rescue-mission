@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
-    
+
     if @answer.save
       redirect_to question_path(params[:question_id])
     else
@@ -22,13 +22,7 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
-    @question = @answer.question_id
-
-    Question.find(@question).answers.each do |answer|
-      if answer.best_answer == true
-        answer.update(best_answer: false)
-      end
-    end
+    Answer.only_one_best_answer(@answer.question_id)
 
     if @answer.update(best_answer: true)
       flash[:notice] = "You have marked a best answer"
